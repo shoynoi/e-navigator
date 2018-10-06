@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   enum gender: { man: 0, woman: 1 }
+  has_many :interviews
 
   def age
     date_format = "%Y%m%d"
