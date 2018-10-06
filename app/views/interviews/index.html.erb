@@ -1,2 +1,22 @@
-<h1>Interviews#index</h1>
-<p>Find me in app/views/interviews/index.html.erb</p>
+<h1><%= "#{@user.name}さんの面接一覧" %></h1>
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th><div class="text-center">面接開始時間</div></th>
+      <th><div class="text-center">承認状態</div></th>
+      <th><div class="text-center">備考欄</div></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <% @interviews.each do |interview| %>
+    <tbody>
+      <tr>
+        <td><div class="text-center"><%= interview.schedule %></div></td>
+        <td><div class="text-center"><%= interview.status %></div></td>
+        <td><div class="text-center"><%= interview.note %></div></td>
+        <td><div class="text-center"><%= link_to "編集",  edit_interview_path, class: "btn btn-info"%></div></td>
+        <td><div class="text-center"><%= link_to "削除", interview, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></div></td>
+      </tr>
+    </tbody>
+  <% end %>
+</table>
