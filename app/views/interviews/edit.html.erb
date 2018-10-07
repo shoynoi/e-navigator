@@ -1,2 +1,4 @@
-<h1>Interviews#edit</h1>
-<p>Find me in app/views/interviews/edit.html.erb</p>
+<% provide(:url, interview_path) %>
+<% provide(:button_text, "更新") %>
+<h1>面接日程編集</h1>
+<%= render 'form' %>

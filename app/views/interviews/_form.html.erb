@@ -1,0 +1,29 @@
+<%= form_for(@interview, url: yield(:url)) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :schedule, "開始時間" %>
+    <%= raw sprintf(
+                f.datetime_select(
+                    :schedule,
+                    {
+                        use_month_numbers: true,
+                        start_year: Time.now.year,
+                        end_year: (Time.now.year + 5),
+                        minute_step: 5,
+                        date_separator: '%s',
+                        datetime_separator: '%s',
+                        time_separator: '%s',
+                    },
+                    { class: "form-control bootstrap-selector" }
+                ),
+                "年 ", "月 ", "日 ", "時 ",) + "分" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :note, "備考欄" %>
+    <%= f.text_area :note, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  </div>
+<% end %>
