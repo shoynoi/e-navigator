@@ -14,7 +14,7 @@
   <% @interviews.each do |interview| %>
     <tbody>
       <tr>
-        <td><div class="text-center"><%= interview.schedule %></div></td>
+        <td><div class="text-center"><%= interview.schedule.strftime('%Y年%m月%d日 %H:%M') %></div></td>
         <td><div class="text-center"><%= interview.status %></div></td>
         <td><div class="text-center"><%= interview.note %></div></td>
         <td><div class="text-center"><%= link_to "編集",  edit_interview_path(interview.id), class: "btn btn-info"%></div></td>
