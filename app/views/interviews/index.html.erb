@@ -18,7 +18,7 @@
         <td><div class="text-center"><%= interview.status %></div></td>
         <td><div class="text-center"><%= interview.note %></div></td>
         <td><div class="text-center"><%= link_to "編集",  edit_interview_path(interview.id), class: "btn btn-info"%></div></td>
-        <td><div class="text-center"><%= link_to "削除", interview, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></div></td>
+        <td><div class="text-center"><%= link_to "削除", interview_path(interview), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></div></td>
       </tr>
     </tbody>
   <% end %>
