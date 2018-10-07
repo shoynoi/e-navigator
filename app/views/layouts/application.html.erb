@@ -33,8 +33,11 @@
       </nav>
     </header>
     <div class="container">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <% flash.each do |message_type, message| %>
+        <% message_type = "info" if message_type == "notice" %>
+        <% message_type = "danger" if message_type == "alert" %>
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+      <% end %>
       <%= yield %>
     </div>
   </body>
