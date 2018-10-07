@@ -4,9 +4,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     root :to => "devise/sessions#new"
   end
-  resources :users, only: [:index] do
-    member do
-      resources :interviews
-    end
+  resources :users do
+    resources :interviews, shallow: true
   end
 end

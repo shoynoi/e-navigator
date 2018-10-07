@@ -13,3 +13,8 @@
 .text {
   vertical-align: middle;
 }
+
+textarea {
+  resize: vertical;
+  overflow: auto;
+}
