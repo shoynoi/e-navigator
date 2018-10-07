@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
     '/users'
   end
 
+  def current_user?
+    user = User.find(params[:user_id])
+    user == current_user
+  end
+
   protected
 
     def configure_permitted_parameters
