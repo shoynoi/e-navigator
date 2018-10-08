@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
     '/users'
   end
 
-  def current_user?
-    user = User.find(params[:user_id])
+  def current_user?(user)
     user == current_user
   end
 

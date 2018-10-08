@@ -7,7 +7,8 @@ class InterviewsController < ApplicationController
   end
 
   def new
-    if current_user?
+    user = User.find(params[:user_id])
+    if current_user?(user)
       @interview = current_user.interviews.build
     else
       flash[:danger] = "アクセスできません"
