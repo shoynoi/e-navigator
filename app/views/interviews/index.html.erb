@@ -1,6 +1,6 @@
 <h1>
   <span class="text"><%= "#{@user.name}さんの面接一覧" %></span>
-  <span class="button"><%= link_to "新規面接作成", new_user_interview_path, class: "btn btn-primary" %></span>
+  <span class="button"><%= link_to "新規面接作成", new_user_interview_path(@user), class: "btn btn-primary" %></span>
 </h1>
 <table class="table table-bordered table-hover">
   <thead>
@@ -17,8 +17,8 @@
         <td><div class="text-center"><%= interview.schedule.strftime('%Y年%m月%d日 %H:%M') %></div></td>
         <td><div class="text-center"><%= interview.status %></div></td>
         <td><div class="text-center"><%= interview.note %></div></td>
-        <td><div class="text-center"><%= link_to "編集",  edit_interview_path(interview.id), class: "btn btn-info"%></div></td>
-        <td><div class="text-center"><%= link_to "削除", interview_path(interview), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></div></td>
+        <td><div class="text-center"><%= link_to "編集",  edit_user_interview_path(id: interview, user_id: @user), class: "btn btn-info"%></div></td>
+        <td><div class="text-center"><%= link_to "削除", user_interview_path(id: interview, user_id: @user), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></div></td>
       </tr>
     </tbody>
   <% end %>

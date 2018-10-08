@@ -51,7 +51,8 @@ class InterviewsController < ApplicationController
     end
 
     def correct_user
-      @interview = current_user.interviews.find_by(id: params[:id])
+      @user = User.find(params[:user_id])
+      @interview = @user.interviews.find_by(id: params[:id])
       redirect_to root_url if @interview.nil?
     end
 
