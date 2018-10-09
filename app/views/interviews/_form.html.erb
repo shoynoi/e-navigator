@@ -1,4 +1,5 @@
 <%= form_for(@interview, url: yield(:url)) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
 
   <div class="form-group">
     <%= f.label :schedule, "開始時間" %>
