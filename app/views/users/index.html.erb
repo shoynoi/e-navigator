@@ -16,7 +16,7 @@
       <tr>
         <td><div class="text-center"><%= user.name %></div></td>
         <td><div class="text-center"><%= user.email %></div></td>
-        <td><div class="text-center"><%= user.age %></div></td>
+        <td><div class="text-center"><%= user.age if user.birthday.present? %></div></td>
         <td><div class="text-center"><%= user.gender %></div></td>
         <td><div class="text-center"><%= user.school %></div></td>
         <td><div class="text-center"><%=  %></div></td>
