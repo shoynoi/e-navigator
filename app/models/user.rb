@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   enum gender: { man: 0, woman: 1 }
-  has_many :interviews
+  has_many :interviews, dependent: :destroy
   validate :birthday_cannot_be_in_the_future
 
   def age
