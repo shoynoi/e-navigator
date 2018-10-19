@@ -1,0 +1,25 @@
+<h1>
+  <span class="text"><%= "#{@user.name}さんの面接一覧" %></span>
+  <span class="button"><%= link_to "新規面接作成", new_user_interview_path(@user), class: "btn btn-primary" %></span>
+</h1>
+<table class="table table-bordered table-hover">
+  <thead>
+  <tr>
+    <th><div class="text-center">面接開始時間</div></th>
+    <th><div class="text-center">承認状態</div></th>
+    <th><div class="text-center">備考欄</div></th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+  <% @interviews.each do |interview| %>
+    <tbody>
+    <tr>
+      <td><div class="text-center"><%= interview.schedule.strftime('%Y年%m月%d日 %H:%M') %></div></td>
+      <td><div class="text-center"><%= interview.status %></div></td>
+      <td><div class="text-center"><%= interview.note %></div></td>
+      <td><div class="text-center"><%= link_to "編集",  edit_user_interview_path(id: interview, user_id: @user), class: "btn btn-info"%></div></td>
+      <td><div class="text-center"><%= link_to "削除", user_interview_path(id: interview, user_id: @user), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></div></td>
+    </tr>
+    </tbody>
+  <% end %>
+</table>
