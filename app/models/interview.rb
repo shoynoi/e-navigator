@@ -4,6 +4,10 @@ class Interview < ApplicationRecord
   validates :schedule, :status, :user_id, presence: true
   validate :schedule_date_cannot_be_in_the_past
 
+  def confirm_interview(user)
+    user.interviews.where.not(id: self).map(&:rejected!) if approved!
+  end
+
   def schedule_date_cannot_be_in_the_past
     if schedule.present? && schedule < DateTime.now
       errors.add(:schedule, "can't be in the past")

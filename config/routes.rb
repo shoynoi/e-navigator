@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     root :to => "users#root"
   end
   resources :users, only: [:index] do
-    resources :interviews
+    resources :interviews do
+      member do
+        patch :approve
+      end
+    end
   end
 end

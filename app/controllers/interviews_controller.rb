@@ -44,6 +44,17 @@ class InterviewsController < ApplicationController
     redirect_to user_interviews_path(current_user)
   end
 
+  def approve
+    @interview = Interview.find(params[:id])
+    @user = User.find(params[:user_id])
+    if @interview.confirm_interview(@user)
+      flash[:success] = "面接希望日時を承認しました"
+      redirect_to user_interviews_path(@user)
+    else
+      render 'index'
+    end
+  end
+
   private
 
     def interview_params

@@ -13,7 +13,13 @@
     <tr>
       <td><div class="text-center"><%= interview.schedule.strftime('%Y年%m月%d日 %H:%M') %></div></td>
       <td><div class="text-center"><%= interview.note %></div></td>
-      <td><div class="text-center"><%= link_to "承認する", "#", data: { confirm: "#{interview.schedule.strftime('%Y年%m月%d日 %H:%M')}でよろしいですか？" }, class: "btn btn-success" %></div></td>
+      <td><div class="text-center">
+        <%= link_to "承認する",
+           approve_user_interview_path(id: interview, user_id: @user),
+           method: :patch,
+           data: { confirm: "#{interview.schedule.strftime('%Y年%m月%d日 %H:%M')}でよろしいですか？" },
+           class: "btn btn-success" %>
+      </div></td>
     </tr>
     </tbody>
   <% end %>
