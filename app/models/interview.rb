@@ -8,6 +8,10 @@ class Interview < ApplicationRecord
     user.interviews.where.not(id: self).map(&:rejected!) if approved!
   end
 
+  def customized_schedule_format
+    schedule.strftime('%Y年%m月%d日 %H:%M')
+  end
+
   def schedule_date_cannot_be_in_the_past
     if schedule.present? && schedule < DateTime.now
       errors.add(:schedule, "can't be in the past")
