@@ -1,5 +1,5 @@
 class InterviewsController < ApplicationController
-  before_action :correct_user, only: [:edit, :destroy, :update]
+  before_action :correct_user, only: [:edit, :destroy, :update, :approve]
   before_action :authenticate_user!
   def index
     @user = User.find(params[:user_id])
@@ -45,13 +45,15 @@ class InterviewsController < ApplicationController
   end
 
   def approve
-    @interview = Interview.find(params[:id])
-    @user = User.find(params[:user_id])
-    if @interview.confirm_interview(@user)
+    if @interview.update_attributes(status: "approved")
+      @user.interviews.where.not(id: @interview).each do |interview|
+        interview.update_attribute(:status, "rejected")
+      end
       flash[:success] = "面接希望日時を承認しました"
       redirect_to user_interviews_path(@user)
     else
-      render 'index'
+      flash[:danger] = "過去の日付は承認できません"
+      redirect_to user_interviews_path(@user)
     end
   end
 

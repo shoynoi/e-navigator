@@ -4,10 +4,6 @@ class Interview < ApplicationRecord
   validates :schedule, :status, :user_id, presence: true
   validate :schedule_date_cannot_be_in_the_past
 
-  def confirm_interview(user)
-    user.interviews.where.not(id: self).map(&:rejected!) if approved!
-  end
-
   def customized_schedule_format
     schedule.strftime('%Y年%m月%d日 %H:%M')
   end
