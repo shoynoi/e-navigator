@@ -58,6 +58,14 @@ class InterviewsController < ApplicationController
     end
   end
 
+  def apply
+    @interviewee = User.find(params[:user_id])
+    @interviewer = params[:interviewer]
+    InterviewMailer.with(interviewee: @interviewee, interviewer: @interviewer).interview_application.deliver_now
+    flash[:success] = "申請が完了しました"
+    redirect_to user_interviews_path(@interviewee)
+  end
+
   private
 
     def interview_params
