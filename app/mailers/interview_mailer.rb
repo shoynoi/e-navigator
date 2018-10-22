@@ -18,8 +18,10 @@ class InterviewMailer < ApplicationMailer
   #   en.interview_mailer.interview_confirmed.subject
   #
   def interview_confirmed
-    @greeting = "Hi"
+    @interviewer = params[:interviewer]
+    @interviewee = params[:interviewee]
+    @interview_date = params[:date]
 
-    mail to: "to@example.org"
+    mail to: %W(#{@interviewer.email} #{@interviewee.email}), subject: "面接日時が確定しました"
   end
 end
