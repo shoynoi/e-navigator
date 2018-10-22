@@ -19,7 +19,7 @@
         <td><div class="text-center"><%= user.age if user.birthday.present? %></div></td>
         <td><div class="text-center"><%= user.gender %></div></td>
         <td><div class="text-center"><%= user.school %></div></td>
-        <td><div class="text-center"><%=  %></div></td>
+        <td><div class="text-center"><%= user.interviews.find_by(status: "approved").try(:customized_schedule_format) %></div></td>
         <td><div class="text-center"><%= link_to "面接一覧", user_interviews_path(user), class: "btn btn-info" %></div></td>
       </tr>
     </tbody>
