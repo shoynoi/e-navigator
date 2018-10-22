@@ -50,6 +50,9 @@ class InterviewsController < ApplicationController
       @user.interviews.where.not(id: @interview).each do |interview|
         interview.update_attribute(:status, "rejected")
       end
+      InterviewMailer.with(interviewee: @user, interviewer: current_user, date: @interview.customized_schedule_format)
+          .interview_confirmed
+          .deliver_now
       flash[:success] = "面接希望日時を承認しました"
       redirect_to user_interviews_path(@user)
     else
