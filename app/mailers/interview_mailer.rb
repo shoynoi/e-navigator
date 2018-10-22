@@ -6,9 +6,10 @@ class InterviewMailer < ApplicationMailer
   #   en.interview_mailer.interview_application.subject
   #
   def interview_application
-    @greeting = "Hi"
+    @interviewer = params[:interviewer]
+    @interviewee = params[:interviewee]
 
-    mail to: "to@example.org"
+    mail to: @interviewer, subject: "面接希望日が決まりました"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml

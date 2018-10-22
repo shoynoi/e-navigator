@@ -1,3 +1,5 @@
-Interview#interview_application
+<%= @interviewee.name %>さんの面接希望日が決まりました。
 
-<%= @greeting %>, find me in app/views/interview_mailer/interview_application.text.erb
+以下のURLから、面接日時の承認をよろしくお願いします。
+
+<%= user_interviews_url(@interviewee) %>

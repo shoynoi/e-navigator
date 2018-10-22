@@ -1,5 +1,6 @@
-<h1>Interview#interview_application</h1>
+<p><%= @interviewee.name %>さんの面接希望日が決まりました。</p>
 
-<p>
-  <%= @greeting %>, find me in app/views/interview_mailer/interview_application.html.erb
-</p>
+<p>以下のURLから、面接日時の承認をよろしくお願いします。</p>
+
+<%= link_to nil, user_interviews_url(@interviewee) %>
+
