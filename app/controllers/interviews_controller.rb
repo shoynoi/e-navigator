@@ -4,6 +4,7 @@ class InterviewsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @interviews = @user.interviews.order(schedule: :asc)
+    @other_users = User.where.not(id: @user)
   end
 
   def new
