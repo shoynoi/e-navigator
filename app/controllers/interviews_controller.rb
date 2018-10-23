@@ -21,7 +21,7 @@ class InterviewsController < ApplicationController
       flash[:success] = "面接希望日時が作成されました"
       redirect_to user_interviews_path
     else
-      render 'interviews/new'
+      render 'new'
     end
   end
 
