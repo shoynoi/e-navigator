@@ -1,14 +1,13 @@
 class InterviewsController < ApplicationController
+  before_action :set_user, only: [:index, :new, :create, :edit]
   before_action :correct_user, only: [:edit, :destroy, :update]
   before_action :authenticate_user!
   def index
-    @user = User.find(params[:user_id])
     @interviews = @user.interviews.order(schedule: :asc)
   end
 
   def new
-    user = User.find(params[:user_id])
-    if current_user?(user)
+    if current_user?(@user)
       @interview = current_user.interviews.build
     else
       flash[:danger] = "アクセスできません"
@@ -50,9 +49,12 @@ class InterviewsController < ApplicationController
       params.require(:interview).permit(:schedule, :note)
     end
 
-    def correct_user
+    def set_user
       @user = User.find(params[:user_id])
-      @interview = @user.interviews.find_by(id: params[:id])
+    end
+
+    def correct_user
+      @interview = current_user.interviews.find_by(id: params[:id])
       redirect_to root_url if @interview.nil?
     end
 
