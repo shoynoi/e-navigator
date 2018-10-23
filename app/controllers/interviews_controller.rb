@@ -30,7 +30,7 @@ class InterviewsController < ApplicationController
   end
 
   def update
-    if @interview.update_attributes(interview_params)
+    if @interview.update(interview_params)
       flash[:success] = "面接希望日時を更新しました"
       redirect_to user_interviews_path(current_user)
     else
