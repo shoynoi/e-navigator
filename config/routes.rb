@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     root :to => "users#root"
   end
-  resources :users, only: [:index]
+  resources :users, only: [:index] do
+    resources :interviews
+  end
 end
