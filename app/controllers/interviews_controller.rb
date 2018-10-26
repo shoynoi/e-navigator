@@ -1,6 +1,6 @@
 class InterviewsController < ApplicationController
-  before_action :set_user, only: [:index, :new, :create, :edit]
-  before_action :correct_user, only: [:edit, :destroy, :update, :approve]
+  before_action :set_user, only: [:index, :new, :create, :edit, :approve]
+  before_action :correct_user, only: [:edit, :destroy, :update]
   before_action :authenticate_user!
   def index
     @interviews = @user.interviews.order(schedule: :asc)
@@ -44,6 +44,7 @@ class InterviewsController < ApplicationController
   end
 
   def approve
+    @interview = Interview.find(params[:id])
     if @interview.update(status: "approved")
       @user.interviews.where.not(id: @interview).each do |interview|
         interview.update_attribute(:status, "rejected")
