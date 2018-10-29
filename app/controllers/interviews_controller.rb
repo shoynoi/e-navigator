@@ -10,16 +10,14 @@ class InterviewsController < ApplicationController
     if current_user?(@user)
       @interview = current_user.interviews.build
     else
-      flash[:danger] = "アクセスできません"
-      redirect_to user_interviews_path(current_user)
+      redirect_to user_interviews_path(current_user), flash: { danger: "アクセスできません" }
     end
   end
 
   def create
     @interview = current_user.interviews.build(interview_params)
     if @interview.save
-      flash[:success] = "面接希望日時が作成されました"
-      redirect_to user_interviews_path
+      redirect_to user_interviews_path, flash: { success: "面接希望日時が作成されました" }
     else
       render 'new'
     end
@@ -30,8 +28,7 @@ class InterviewsController < ApplicationController
 
   def update
     if @interview.update(interview_params)
-      flash[:success] = "面接希望日時を更新しました"
-      redirect_to user_interviews_path(current_user)
+      redirect_to user_interviews_path(current_user), flash: { success: "面接希望日時を更新しました" }
     else
       render 'edit'
     end
@@ -39,8 +36,7 @@ class InterviewsController < ApplicationController
 
   def destroy
     @interview.destroy
-    flash[:success] = "面接希望日時を削除しました。"
-    redirect_to user_interviews_path(current_user)
+    redirect_to user_interviews_path(current_user), flash: { success: "面接希望日時を削除しました" }
   end
 
   def approve
@@ -49,11 +45,9 @@ class InterviewsController < ApplicationController
       @user.interviews.where.not(id: @interview).each do |interview|
         interview.update_attribute(:status, "rejected")
       end
-      flash[:success] = "面接希望日時を承認しました"
-      redirect_to user_interviews_path(@user)
+      redirect_to user_interviews_path(@user), flash: { success: "面接希望日時を承認しました" }
     else
-      flash[:danger] = "過去の日付は承認できません"
-      redirect_to user_interviews_path(@user)
+      redirect_to user_interviews_path(@user), flash: { danger: "過去の日付は承認できません" }
     end
   end
 
