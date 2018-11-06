@@ -42,9 +42,7 @@ class InterviewsController < ApplicationController
   def approve
     @interview = Interview.find(params[:id])
     if @interview.update(status: "approved")
-      @user.interviews.where.not(id: @interview).each do |interview|
-        interview.update_attribute(:status, "rejected")
-      end
+      @user.interviews.where.not(id: @interview).update_all(status: "rejected")
       redirect_to user_interviews_path(@user), flash: { success: "面接希望日時を承認しました" }
     else
       redirect_to user_interviews_path(@user), flash: { danger: "過去の日付は承認できません" }
