@@ -3,4 +3,8 @@ class Interview < ApplicationRecord
   belongs_to :user
   validates :status, :user_id, presence: true
   validates :schedule, presence: true, schedule: { allow_blank: true }
+
+  def customized_schedule_format
+    schedule.strftime('%Y年%m月%d日 %H:%M')
+  end
 end

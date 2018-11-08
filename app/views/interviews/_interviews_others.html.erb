@@ -1,0 +1,26 @@
+<h1><%= "#{@user.name}さんの面接希望一覧" %></h1>
+<h2>現在の面接日程: <%= @interviews.find_by(status: "approved").try(:customized_schedule_format) %> </h2>
+<table class="table table-bordered table-hover">
+  <thead>
+  <tr>
+    <th><div class="text-center">面接開始時間</div></th>
+    <th><div class="text-center">備考欄</div></th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+  <% @interviews.each do |interview| %>
+    <tbody>
+    <tr>
+      <td><div class="text-center"><%= interview.customized_schedule_format %></div></td>
+      <td><div class="text-center"><%= interview.note %></div></td>
+      <td><div class="text-center">
+        <%= link_to "承認する",
+           approve_user_interview_path(id: interview, user_id: @user),
+           method: :patch,
+           data: { confirm: "#{interview.customized_schedule_format}でよろしいですか？" },
+           class: "btn btn-success" %>
+      </div></td>
+    </tr>
+    </tbody>
+  <% end %>
+</table>
