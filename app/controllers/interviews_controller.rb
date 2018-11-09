@@ -4,7 +4,7 @@ class InterviewsController < ApplicationController
   before_action :authenticate_user!
   def index
     @interviews = @user.interviews.order(schedule: :asc)
-    @other_users = User.where.not(id: @user)
+    @others_email = User.where.not(id: @user).pluck(:email)
   end
 
   def new
