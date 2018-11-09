@@ -5,7 +5,7 @@ class InterviewMailer < ApplicationMailer
   #
   #   en.interview_mailer.interview_application.subject
   #
-  def interview_application
+  def apply
     @interviewer = params[:interviewer]
     @interviewee = params[:interviewee]
 
@@ -17,7 +17,7 @@ class InterviewMailer < ApplicationMailer
   #
   #   en.interview_mailer.interview_confirmed.subject
   #
-  def interview_confirmed
+  def confirm
     @interviewer = params[:interviewer]
     @interviewee = params[:interviewee]
     @interview_date = params[:date]
