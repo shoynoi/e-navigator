@@ -3,7 +3,7 @@ class InterviewMailer < ApplicationMailer
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
-  #   en.interview_mailer.interview_application.subject
+  #   en.interview_mailer.apply.subject
   #
   def apply
     @interviewer = params[:interviewer]
@@ -15,7 +15,7 @@ class InterviewMailer < ApplicationMailer
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
-  #   en.interview_mailer.interview_confirmed.subject
+  #   en.interview_mailer.confirm.subject
   #
   def confirm
     @interviewer = params[:interviewer]
