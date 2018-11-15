@@ -45,7 +45,7 @@ class InterviewsController < ApplicationController
     if @interview.update(status: "approved")
       @user.interviews.where.not(id: @interview).update_all(status: "rejected")
       InterviewMailer.with(interviewee: @user, interviewer: current_user, date: @interview.customized_schedule_format)
-          .interview_confirmed
+          .confirm
           .deliver_now
       redirect_to user_interviews_path(@user), flash: { success: "面接希望日時を承認しました" }
     else
@@ -56,7 +56,7 @@ class InterviewsController < ApplicationController
   def apply
     @interviewee = User.find(params[:user_id])
     @interviewer = params[:interviewer]
-    InterviewMailer.with(interviewee: @interviewee, interviewer: @interviewer).interview_application.deliver_now
+    InterviewMailer.with(interviewee: @interviewee, interviewer: @interviewer).apply.deliver_now
     flash[:success] = "申請が完了しました"
     redirect_to user_interviews_path(@interviewee)
   end
