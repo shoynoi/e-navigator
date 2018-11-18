@@ -9,6 +9,12 @@ Rails.application.routes.draw do
       member do
         patch :approve
       end
+      collection do
+        post :apply
+      end
     end
+  end
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 end

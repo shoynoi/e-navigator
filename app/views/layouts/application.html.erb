@@ -25,7 +25,9 @@
             <ul class="nav navbar-nav">
               <li><%= link_to "プロフィール", edit_user_registration_path(current_user) %></li>
               <li><%= link_to "自分の面接一覧", user_interviews_path(current_user) %></li>
-              <li><%= link_to "メール", "#" %></li>
+              <% if Rails.env.development? %>
+                <li><%= link_to "メール", letter_opener_web_path %></li>
+              <% end %>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
             </ul>
           <% end %>

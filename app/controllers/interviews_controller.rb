@@ -4,6 +4,7 @@ class InterviewsController < ApplicationController
   before_action :authenticate_user!
   def index
     @interviews = @user.interviews.order(schedule: :asc)
+    @others_email = User.where.not(id: @user).pluck(:email)
   end
 
   def new
@@ -43,10 +44,21 @@ class InterviewsController < ApplicationController
     @interview = Interview.find(params[:id])
     if @interview.update(status: "approved")
       @user.interviews.where.not(id: @interview).update_all(status: "rejected")
+      InterviewMailer.with(interviewee: @user, interviewer: current_user, date: @interview.customized_schedule_format)
+          .confirm
+          .deliver_now
       redirect_to user_interviews_path(@user), flash: { success: "面接希望日時を承認しました" }
     else
       redirect_to user_interviews_path(@user), flash: { danger: "過去の日付は承認できません" }
     end
+  end
+
+  def apply
+    @interviewee = User.find(params[:user_id])
+    @interviewer = params[:interviewer]
+    InterviewMailer.with(interviewee: @interviewee, interviewer: @interviewer).apply.deliver_now
+    flash[:success] = "申請が完了しました"
+    redirect_to user_interviews_path(@interviewee)
   end
 
   private

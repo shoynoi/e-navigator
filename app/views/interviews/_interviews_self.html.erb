@@ -23,3 +23,9 @@
     </tbody>
   <% end %>
 </table>
+<div class="form-inline">
+  <%= form_tag(apply_user_interviews_path) do  %>
+    <%= select_tag :interviewer, options_for_select(@others_email), class: "form-control" %>
+    <%= submit_tag "申請", class: "btn btn-success" %>
+  <% end %>
+</div>
